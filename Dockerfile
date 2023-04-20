@@ -1,6 +1,6 @@
-# Pull base image 
-From tomcat:8-jre8 
-
-# Maintainer 
-MAINTAINER "valaxytech@gmail.com" 
-COPY ./webapp.war /usr/local/tomcat/webapps
+FROM openjdk:8-jdk-alpine
+VOLUME /tmp
+ADD target/hello-docker-0.0.1-SNAPSHOT.jar hello-docker-app.jar
+ENV JAVA_OPTS=""
+EXPOSE 8080
+ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /hello-docker-app.jar" ]
